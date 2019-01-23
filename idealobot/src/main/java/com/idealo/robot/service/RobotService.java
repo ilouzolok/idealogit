@@ -82,17 +82,17 @@ public class RobotService {
 				if(robotModel != null) {
 					position = robotModel.getPosition();
 					if(robotModel.getDirection().equalsIgnoreCase("EAST")) {
-						position[0] += steps;
+						position[1] += steps;
 					}
 					else {
 						//'Minus' indicates a move in the opposite direction
-						position[0] -= steps;
+						position[1] -= steps;
 					}
 					robotModel.setPosition(position);
 				}
 				else {
 					//If the robotModel is null, that implies it has not moved yet from its initial position
-					position[0] = steps;
+					position[1] = steps;
 					direction = "EAST";
 					robotModel = new RobotModel(position, direction);
 				}

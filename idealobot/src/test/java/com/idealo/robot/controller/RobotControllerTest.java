@@ -32,9 +32,9 @@ public class RobotControllerTest {
 	@Test
 	public void testMoveRobot() throws Exception  {
 		String robotScript = "POSITION 3 1 EAST \n";
-		String expectedResult = "1-3:EAST";
 		int[] position = {3, 1};
 		String direction = "EAST";
+		String expectedResult = "3-1:EAST";
 		RobotModel robotModelMock = new RobotModel(position, direction);
 		
 		given(robotServiceMock.processRobotScript(robotScript)).willReturn(robotModelMock);

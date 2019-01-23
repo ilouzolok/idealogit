@@ -6,7 +6,7 @@
 <!-- Defines the HTML View that will be returned with the script processing results -->
 <!--  The result is text that contains information in the following form "row-col:direction" -->
 <body>
-	<th:block th:fragment="results" th:text="${robotModel.getCol()} + '-' + ${robotModel.getRow()} + ':' + ${robotModel.getDirection()}">
+	<th:block th:fragment="results" th:text="${robotModel.getRow()} + '-' + ${robotModel.getCol()} + ':' + ${robotModel.getDirection()}">
 	</th:block>
 </body>
 
