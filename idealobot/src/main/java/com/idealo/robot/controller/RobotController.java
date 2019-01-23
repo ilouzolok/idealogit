@@ -40,7 +40,5 @@ public class RobotController {
 			nException.printStackTrace();
 		}
 		return "robotView:: results";
-		
-		
 	}
 }

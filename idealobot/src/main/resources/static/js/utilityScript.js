@@ -16,7 +16,7 @@ function createGrid(dim) {
 	for (row = 0; row < dim ; row ++){
 		for (col = 0; col < dim; col ++){
 			cellId = row + "-" + col;
-			cellText = "("+ col + "," + row + ")";
+			cellText = "("+ row + "," + col + ")";
 			if(row == 0 && col == 0){
 				//Place the robot at the initial grid position, when no script is provided
 				//Note that the Unicode representation of a robot face is &#129302;

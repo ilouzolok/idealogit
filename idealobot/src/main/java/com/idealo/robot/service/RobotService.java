@@ -27,8 +27,6 @@ public class RobotService {
 	 * of move commands to be executed by the robot
 	 * @param script a {@link String} representation of the robot move sequence
 	 * @return a {@link List} of all commands in the script
-	 * @throws NumberFormatException if the position of the robot, or the number of steps cannot be
-	 * parsed properly
 	 */
 	public List<String> parseRobotScript(String script){
 		List<String>commands = new ArrayList<String>();
@@ -52,7 +50,8 @@ public class RobotService {
 	 * Defines a movement logic to update the robot position by interpreting a
 	 * set of commands provided in the script.
 	 * @param script a block of text submitted from the front-end UI to be processed
-	 * @throws NumberFormatException thrown when some input data could not be parsed into numbers
+	 * @throws NumberFormatException if the position of the robot, or the number of steps cannot be
+	 * parsed properly
 	 */
 	public RobotModel processRobotScript(String script)throws NumberFormatException {
 		List<String>commandLines = parseRobotScript(script);
@@ -78,10 +77,10 @@ public class RobotService {
 			}
 			//Move the robot in its current direction
 			else if (commandName.equalsIgnoreCase("FORWARD")) {
+				//Get the number of steps specified in the command line
+				steps = Integer.parseInt(parts[1]);
 				if(robotModel != null) {
 					position = robotModel.getPosition();
-					//Get the number of steps specified in the command line
-					steps = Integer.parseInt(parts[1]);
 					if(robotModel.getDirection().equalsIgnoreCase("EAST")) {
 						position[0] += steps;
 					}
@@ -90,6 +89,12 @@ public class RobotService {
 						position[0] -= steps;
 					}
 					robotModel.setPosition(position);
+				}
+				else {
+					//If the robotModel is null, that implies it has not moved yet from its initial position
+					position[0] = steps;
+					direction = "EAST";
+					robotModel = new RobotModel(position, direction);
 				}
 			}
 			else if (commandName.equalsIgnoreCase("WAIT")) {
