@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Idealo - Home </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		  <link rel="stylesheet" href="css/style.css"/>
+		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body onload="createGrid(5)">
+	<div class = "container">
+		<div class="row">
+			<div class="col-sm-6">
+				<div id= "scriptForm">
+					<div class = "form-group">
+						<label for="script">Enter/Paste Robot Script</label>
+						<textarea rows="10" class="form-control" id = "script"></textarea>
+					</div>
+					<button class="btn btn-default" onclick="postRobotScript()">Run Script</button>
+				</div>	
+			</div>
+			
+			<div class="col-sm-6">
+				<div class = "grid-container"></div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Load External JavaScript File -->
+	<script src="js/utilityScript.js"></script>
+	
+</body>
+
+</html>
