@@ -17,10 +17,13 @@ import com.idealo.robot.model.RobotModel;
 @Service
 public class RobotService {
 
-	RobotModel robotModel = null;
-	int[] position = new int[2];
-	String direction = null;
-	int steps;
+	private RobotModel robotModel = null;
+	private int[] position = new int[2];
+	private String direction = null;
+	private int steps;
+	private static final int UPPER_LIMIT = 4;
+	private static final int LOWER_LIMIT = 0;
+	
 	
 	/**
 	 * Reads a script provided as a {@link String} and returns a list
@@ -79,14 +82,27 @@ public class RobotService {
 			else if (commandName.equalsIgnoreCase("FORWARD")) {
 				//Get the number of steps specified in the command line
 				steps = Integer.parseInt(parts[1]);
+				int distance = 0;
 				if(robotModel != null) {
 					position = robotModel.getPosition();
 					if(robotModel.getDirection().equalsIgnoreCase("EAST")) {
-						position[1] += steps;
+						distance = position[1] += steps;
+						if(distance > UPPER_LIMIT) {
+							position[1] = UPPER_LIMIT;
+						}
+						else {
+							position[1] = distance;
+						}
 					}
 					else {
 						//'Minus' indicates a move in the opposite direction
-						position[1] -= steps;
+						distance = position[1] -= steps;
+						if(distance < LOWER_LIMIT) {
+							position[1] = LOWER_LIMIT;
+						}
+						else {
+							position[1] = distance;
+						}
 					}
 					robotModel.setPosition(position);
 				}
@@ -98,7 +114,7 @@ public class RobotService {
 				}
 			}
 			else if (commandName.equalsIgnoreCase("WAIT")) {
-				//Do Nothing!
+				//Do Nothing! Empty blocks should be avoided!
 			}
 			else if(commandName.equalsIgnoreCase("TURNAROUND")) {
 				if(robotModel != null) {
